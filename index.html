@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Защищенное послание</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Password Protection Screen */
+        .password-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .password-container {
+            background: rgba(25, 25, 35, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            text-align: center;
+        }
+        
+        .password-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #e0aaff;
+            margin-bottom: 20px;
+        }
+        
+        .password-container p {
+            color: #b8b8d1;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .password-input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(157, 78, 221, 0.5);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .password-input:focus {
+            border-color: #9d4edd;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b8b8d1;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .password-submit {
+            background: linear-gradient(to right, #5a189a, #7b2cbf);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .password-submit:hover {
+            background: linear-gradient(to right, #7b2cbf, #9d4edd);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        }
+        
+        .password-error {
+            color: #ff6b6b;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            min-height: 20px;
+            display: none;
+        }
+        
+        .password-hint {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        /* Main Content - Hidden until password is entered */
+        .main-content {
+            display: none;
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #9d4edd;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+        }
+        
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #b8b8d1;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        /* Heart Animation */
+        .heart-icon {
+            color: #c77dff;
+            font-size: 2rem;
+            margin: 0 10px;
+            animation: subtlePulse 2s infinite;
+        }
+        
+        @keyframes subtlePulse {
+            0% { 
+                transform: scale(1); 
+                opacity: 0.8;
+            }
+            50% { 
+                transform: scale(1.1); 
+                opacity: 1;
+                text-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+            }
+            100% { 
+                transform: scale(1); 
+                opacity: 0.8;
+            }
+        }
+        
+        /* Main Content */
+        .letter-container {
+            background: rgba(25, 25, 35, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(157, 78, 221, 0.2);
+        }
+        
+        .letter-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #5a189a, #7b2cbf, #9d4edd);
+        }
+        
+        .letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+        
+        .recipient {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #e0aaff;
+        }
+        
+        .date {
+            color: #b8b8d1;
+            font-style: italic;
+        }
+        
+        .letter-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #d8d8e6;
+        }
+        
+        .letter-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .secret-note {
+            background: rgba(157, 78, 221, 0.1);
+            border-left: 3px solid #9d4edd;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+            font-style: italic;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #c77dff;
+        }
+        
+        /* Memories Section */
+        .memories-section {
+            margin-top: 60px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #e0aaff;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, #5a189a, #9d4edd);
+        }
+        
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .memory-card {
+            background: rgba(30, 30, 46, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(157, 78, 221, 0.1);
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+        }
+        
+        .memory-img {
+            height: 180px;
+            background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e0aaff;
+            font-size: 3rem;
+        }
+        
+        .memory-content {
+            padding: 20px;
+        }
+        
+        .memory-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #e0aaff;
+            margin-bottom: 10px;
+        }
+        
+        .memory-desc {
+            color: #b8b8d1;
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            color: #b8b8d1;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .love-counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .counter-item {
+            margin: 0 15px;
+            text-align: center;
+        }
+        
+        .counter-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #c77dff;
+            display: block;
+        }
+        
+        .counter-label {
+            font-size: 0.9rem;
+            color: #b8b8d1;
+        }
+        
+        /* Interactive elements */
+        .interactive-placeholder {
+            background: rgba(30, 30, 46, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            border: 2px dashed rgba(157, 78, 221, 0.3);
+        }
+        
+        .interactive-placeholder h3 {
+            color: #e0aaff;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .js-indicator {
+            display: inline-block;
+            background: linear-gradient(to right, #5a189a, #9d4edd);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        /* Security elements */
+        .security-notice {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(90, 24, 154, 0.1);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #b8b8d1;
+        }
+        
+        .encrypted-icon {
+            color: #9d4edd;
+            margin-right: 8px;
+        }
+        
+        /* Button for future functionality */
+        .secret-button {
+            background: linear-gradient(to right, #5a189a, #7b2cbf);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .secret-button:hover {
+            background: linear-gradient(to right, #7b2cbf, #9d4edd);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .letter-container {
+                padding: 25px;
+            }
+            
+            .letter-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .date {
+                margin-top: 10px;
+            }
+            
+            .memories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .password-container {
+                padding: 30px 20px;
+            }
+            
+            .password-container h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .letter-content {
+                font-size: 1rem;
+            }
+            
+            .memories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Protection Screen -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-container">
+            <h2><i class="fas fa-lock"></i> Защищенное послание</h2>
+            <p>Это сообщение зашифровано и доступно только для адресата. Введите пароль для доступа.</p>
+            
+            <div class="password-input-container">
+                <input type="password" id="passwordInput" class="password-input" placeholder="Введите секретный пароль">
+                <span class="password-toggle" id="passwordToggle">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+            
+            <div class="password-error" id="passwordError">
+                Неверный пароль. Попробуйте еще раз.
+            </div>
+            
+            <button class="password-submit" id="passwordSubmit">
+                <i class="fas fa-key"></i> Открыть послание
+            </button>
+            
+            <div class="password-hint">
+                Подсказка: пароль состоит только из цифр
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content (hidden until password is entered) -->
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <h1>Тайное послание</h1>
+                    <div class="subtitle">
+                        <i class="fas fa-heart heart-icon"></i>
+                        Слова, которые можно сказать только шепотом
+                        <i class="fas fa-heart heart-icon"></i>
+                    </div>
+                    <p style="color: #b8b8d1;">Это послание только для тебя, самого особенного человека в моей жизни</p>
+                </div>
+            </header>
+            
+            <div class="security-notice">
+                <i class="fas fa-lock encrypted-icon"></i>
+                Это сообщение защищено паролем и доступно только для твоих глаз
+            </div>
+            
+            <main>
+                <section class="letter-container">
+                    <div class="letter-header">
+                        <div class="recipient">Моя тайная любовь,</div>
+                        <div class="date">Сегодня, <span id="current-date"></span></div>
+                    </div>
+                    
+                    <div class="letter-content">
+                        <p>Эти безумные недели с тобой перевернули мой мир с ног на голову. Каждая встреча, каждый взгляд, каждое прикосновение — всё это заставляет мое сердце биться чаще, а мысли занимаешь только ты.</p>
+                        
+                        <p>Я знаю, что наша ситуация сложная, и мы должны быть осторожны. Но эти чувства, которые вспыхнули между нами, слишком сильны, чтобы их игнорировать. Ты появилась в моей жизни внезапно, как яркая вспышка в темноте, и теперь всё вокруг окрасилось новыми красками.</p>
+                        
+                        <div class="secret-note">
+                            Я понимаю все обстоятельства, но не могу молчать о том, что чувствую. Каждая минута вдали от тебя кажется вечностью.
+                        </div>
+                        
+                        <p>Помнишь наш первый раз? Казалось, мы знали друг друга всю жизнь. С той самой минуты я понял, что встретил кого-то невероятно особенного. Твоя улыбка, твой смех, твой взгляд — всё это сводит меня с ума.</p>
+                        
+                        <p>Эти моменты были самыми счастливыми в моей жизни. Каждая встреча с тобой — как глоток свежего воздуха для тонущего меня. Я ловлю себя на мысли, что постоянно жду нашей следующей встречи, следующего момента, когда смогу снова увидеть тебя.</p>
+                        
+                        <p>Ты пробудила во мне чувства, о которых я даже не подозревал. И пусть наше время вместе ограничено обстоятельствами, каждую секунду с тобой я буду ценить как самый большой подарок судьбы.</p>
+                        
+                        <p>Это послание — моё признание. Признание в том, что ты заняла особое место в моём сердце, которое никто и никогда не сможет занять.</p>
+                    </div>
+                    
+                    <div class="signature">Тот, кто думает о тебе каждую минуту</div>
+                </section>
+                
+                <section class="memories-section">
+                    <h2>Наши украденные моменты</h2>
+                    <div class="memories-grid">
+                        <div class="memory-card">
+                            <div class="memory-img">
+                                <i class="fas fa-kiss-wink-heart"></i>
+                            </div>
+                            <div class="memory-content">
+                                <div class="memory-title">Первый поцелуй</div>
+                                <div class="memory-desc">Момент, когда наши губы встретились, и я понял, что всё изменилось навсегда.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="memory-card">
+                            <div class="memory-img">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="memory-content">
+                                <div class="memory-title">Тайная встреча</div>
+                                <div class="memory-desc">Тот час, который длился вечность. Мы говорили обо всем и ни о чем одновременно.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="memory-card">
+                            <div class="memory-img">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <div class="memory-content">
+                                <div class="memory-title">Ночные разговоры</div>
+                                <div class="memory-desc">Когда весь мир спал, а мы делились своими самыми сокровенными мыслями.</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <div class="interactive-placeholder">
+                    <h3>Тайные функции скоро появятся!</h3>
+                    <p>Тут я обязательно что нибудь придумаю но попозже!!!</p>
+                    <button class="secret-button" id="secretBtn">
+                        <i class="fas fa-key"></i> Сообщение
+                    </button>
+                    <div class="js-indicator">JavaScript функционал будет добавлен позже</div>
+                </div>
+            </main>
+            
+            <footer>
+                <div class="love-counter">
+                    <div class="counter-item">
+                        <span class="counter-number" id="days-together">3</span>
+                        <span class="counter-label">дней до встречи</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-number">∞</span>
+                        <span class="counter-label">мыслей о тебе</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Обратите внимание: в реальном коде нельзя полностью скрыть контент от просмотра через DevTools
+        // Но можно значительно затруднить доступ для обычного пользователя
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const CORRECT_PASSWORD = '211125252';
+            const passwordScreen = document.getElementById('passwordScreen');
+            const mainContent = document.getElementById('mainContent');
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordSubmit = document.getElementById('passwordSubmit');
+            const passwordError = document.getElementById('passwordError');
+            const passwordToggle = document.getElementById('passwordToggle');
+            
+            // Проверяем, был ли уже введен пароль (сохраненный в sessionStorage)
+            const passwordEntered = sessionStorage.getItem('loveMessageUnlocked');
+            
+            if (passwordEntered === 'true') {
+                // Если пароль уже был введен в этой сессии, показываем контент
+                passwordScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                initializeMainContent();
+            } else {
+                // Иначе показываем экран ввода пароля
+                passwordScreen.style.display = 'flex';
+                mainContent.style.display = 'none';
+            }
+            
+            // Функция для переключения видимости пароля
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            // Функция проверки пароля
+            function checkPassword() {
+                const enteredPassword = passwordInput.value.trim();
+                
+                if (enteredPassword === CORRECT_PASSWORD) {
+                    // Правильный пароль
+                    passwordError.style.display = 'none';
+                    
+                    // Сохраняем в sessionStorage, что пароль введен
+                    sessionStorage.setItem('loveMessageUnlocked', 'true');
+                    
+                    // Показываем анимацию успеха
+                    passwordSubmit.innerHTML = '<i class="fas fa-check"></i> Доступ разрешен!';
+                    passwordSubmit.style.background = 'linear-gradient(to right, #2e7d32, #4caf50)';
+                    
+                    // Плавный переход к контенту
+                    setTimeout(() => {
+                        passwordScreen.style.opacity = '0';
+                        passwordScreen.style.transition = 'opacity 0.5s ease';
+                        
+                        setTimeout(() => {
+                            passwordScreen.style.display = 'none';
+                            mainContent.style.display = 'block';
+                            initializeMainContent();
+                        }, 500);
+                    }, 1000);
+                } else {
+                    // Неправильный пароль
+                    passwordError.style.display = 'block';
+                    passwordInput.style.borderColor = '#ff6b6b';
+                    passwordInput.style.boxShadow = '0 0 10px rgba(255, 107, 107, 0.3)';
+                    
+                    // Анимация ошибки
+                    passwordInput.classList.add('shake');
+                    setTimeout(() => {
+                        passwordInput.classList.remove('shake');
+                    }, 500);
+                    
+                    // Очищаем поле ввода через некоторое время
+                    setTimeout(() => {
+                        passwordInput.value = '';
+                        passwordInput.style.borderColor = 'rgba(157, 78, 221, 0.5)';
+                        passwordInput.style.boxShadow = 'none';
+                    }, 1500);
+                }
+            }
+            
+            // Обработчик нажатия на кнопку ввода пароля
+            passwordSubmit.addEventListener('click', checkPassword);
+            
+            // Обработчик нажатия Enter в поле пароля
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+            
+            // Добавляем CSS для анимации тряски
+            const shakeStyle = document.createElement('style');
+            shakeStyle.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+                .shake {
+                    animation: shake 0.5s ease-in-out;
+                }
+            `;
+            document.head.appendChild(shakeStyle);
+            
+            // Функция инициализации основного контента
+            function initializeMainContent() {
+                // Set current date
+                const now = new Date();
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                document.getElementById('current-date').textContent = now.toLocaleDateString('ru-RU', options);
+                
+                // Add click effect to heart icons
+                const heartIcons = document.querySelectorAll('.fa-heart');
+                heartIcons.forEach(icon => {
+                    icon.addEventListener('click', function() {
+                        this.style.transform = 'scale(1.5)';
+                        this.style.color = '#e0aaff';
+                        this.style.textShadow = '0 0 15px rgba(224, 170, 255, 0.8)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                            this.style.textShadow = 'none';
+                        }, 300);
+                    });
+                });
+                
+                // Secret button interaction
+                const secretBtn = document.getElementById('secretBtn');
+                secretBtn.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-user-secret"></i> Послание отправлено!';
+                    this.style.background = 'linear-gradient(to right, #3a0ca3, #4361ee)';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.background = 'linear-gradient(to right, #5a189a, #7b2cbf)';
+                    }, 1500);
+                    
+                    // Create a temporary secret message
+                    const secretMessage = document.createElement('div');
+                    secretMessage.className = 'security-notice';
+                    secretMessage.style.marginTop = '15px';
+                    secretMessage.style.animation = 'fadeIn 0.5s';
+                    secretMessage.innerHTML = '<i class="fas fa-envelope encrypted-icon"></i> Сообщение ❤: "Я с нетерпением жду нашей следующей встречи"';
+                    
+                    this.parentNode.appendChild(secretMessage);
+                    
+                    setTimeout(() => {
+                        secretMessage.style.opacity = '0';
+                        secretMessage.style.transition = 'opacity 0.5s';
+                        setTimeout(() => {
+                            if (secretMessage.parentNode) {
+                                secretMessage.parentNode.removeChild(secretMessage);
+                            }
+                        }, 500);
+                    }, 3000);
+                });
+                
+                // Add hover effect to memory cards
+                const memoryCards = document.querySelectorAll('.memory-card');
+                memoryCards.forEach(card => {
+                    card.addEventListener('mouseenter', function() {
+                        const icon = this.querySelector('.memory-img i');
+                        if (icon) {
+                            icon.style.transform = 'scale(1.3) rotate(5deg)';
+                            icon.style.transition = 'transform 0.3s ease';
+                            icon.style.color = '#ffd6ff';
+                        }
+                    });
+                    
+                    card.addEventListener('mouseleave', function() {
+                        const icon = this.querySelector('.memory-img i');
+                        if (icon) {
+                            icon.style.transform = 'scale(1) rotate(0deg)';
+                            icon.style.color = '#e0aaff';
+                        }
+                    });
+                });
+                
+                // Add CSS for fadeIn animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                console.log("Защищенное любовное послание загружено. Доступ разрешен.");
+            }
+            
+            // Защита от просмотра через DevTools (базовая)
+            // Важно: это не может полностью защитить от технически подкованного пользователя
+            // Но это создаст дополнительные препятствия
+            
+            // Функция для защиты от контекстного меню (правой кнопки мыши)
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Функция для защиты от комбинаций клавиш (Ctrl+U, Ctrl+Shift+I и т.д.)
+            document.addEventListener('keydown', function(e) {
+                // Отключаем F12
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Отключаем Ctrl+U (просмотр исходного кода)
+                if (e.ctrlKey && e.key === 'u') {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Отключаем Ctrl+Shift+I (открытие DevTools)
+                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Отключаем Ctrl+Shift+J (открытие консоли)
+                if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Отключаем Ctrl+Shift+C (инспектор элементов)
+                if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
