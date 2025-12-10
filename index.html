@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Защищенное послание</title>
+    <title>Для самой особенной</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
@@ -25,7 +25,7 @@
             align-items: center;
         }
         
-        /* Password Protection Screen */
+        /* Password Protection Screen - Упрощенный и красивый */
         .password-screen {
             display: flex;
             justify-content: center;
@@ -33,174 +33,280 @@
             min-height: 100vh;
             width: 100%;
             padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            z-index: 1000;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .password-screen.hidden {
+            opacity: 0;
+            transform: translateY(-100%);
+            pointer-events: none;
         }
         
         .password-container {
             background: rgba(25, 25, 35, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            padding: 50px;
             max-width: 500px;
             width: 100%;
-            border: 1px solid rgba(157, 78, 221, 0.3);
+            border: 2px solid rgba(199, 125, 255, 0.5);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .password-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #ff6b9d, #c77dff, #9d4edd);
         }
         
         .password-container h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: #e0aaff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ffd6ff;
             margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 214, 255, 0.5);
         }
         
         .password-container p {
-            color: #b8b8d1;
+            color: #e0aaff;
             margin-bottom: 30px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
         
         .password-input-container {
             position: relative;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .password-input {
             width: 100%;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(157, 78, 221, 0.5);
-            border-radius: 10px;
+            padding: 18px 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(199, 125, 255, 0.7);
+            border-radius: 12px;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
         }
         
         .password-input:focus {
-            border-color: #9d4edd;
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+            border-color: #ff6b9d;
+            box-shadow: 0 0 25px rgba(255, 107, 157, 0.4);
+            background: rgba(255, 255, 255, 0.12);
         }
         
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #b8b8d1;
-            cursor: pointer;
-            font-size: 1.2rem;
+        .password-input::placeholder {
+            color: rgba(224, 170, 255, 0.6);
         }
         
         .password-submit {
-            background: linear-gradient(to right, #5a189a, #7b2cbf);
+            background: linear-gradient(45deg, #ff6b9d, #c77dff);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 18px 40px;
+            border-radius: 12px;
             font-family: 'Roboto', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             width: 100%;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .password-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .password-submit:hover::before {
+            left: 100%;
         }
         
         .password-submit:hover {
-            background: linear-gradient(to right, #7b2cbf, #9d4edd);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+            background: linear-gradient(45deg, #ff7ea9, #d18cff);
+        }
+        
+        .password-submit:active {
+            transform: translateY(1px);
         }
         
         .password-error {
-            color: #ff6b6b;
+            color: #ff9e9e;
             margin-top: 15px;
-            font-size: 0.9rem;
-            min-height: 20px;
-            display: none;
+            font-size: 1rem;
+            min-height: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: rgba(255, 107, 157, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #ff6b9d;
+        }
+        
+        .password-error.show {
+            opacity: 1;
         }
         
         .password-hint {
-            color: #888;
-            font-size: 0.8rem;
-            margin-top: 20px;
+            color: #c77dff;
+            font-size: 0.95rem;
+            margin-top: 25px;
             font-style: italic;
+            opacity: 0.8;
         }
         
-        /* Main Content - Hidden until password is entered */
+        /* Floating hearts */
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 107, 157, 0.3);
+            font-size: 1.5rem;
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Main Content */
         .main-content {
             display: none;
             width: 100%;
+            animation: fadeIn 1.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
         
         /* Header Styles */
         header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             position: relative;
         }
         
         .header-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            position: relative;
         }
         
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            color: #9d4edd;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+            font-size: 4.5rem;
+            color: #ffd6ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 214, 255, 0.7);
+            animation: glow 3s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 214, 255, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(255, 214, 255, 0.9), 0 0 35px rgba(199, 125, 255, 0.5);
+            }
         }
         
         .subtitle {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #b8b8d1;
-            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: #e0aaff;
+            margin-bottom: 40px;
             font-style: italic;
+            line-height: 1.4;
         }
         
         /* Heart Animation */
         .heart-icon {
-            color: #c77dff;
-            font-size: 2rem;
-            margin: 0 10px;
-            animation: subtlePulse 2s infinite;
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin: 0 15px;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
         
-        @keyframes subtlePulse {
-            0% { 
-                transform: scale(1); 
-                opacity: 0.8;
+        .heart-icon:hover {
+            transform: scale(1.3);
+            color: #ff9e9e;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
             }
-            50% { 
-                transform: scale(1.1); 
-                opacity: 1;
-                text-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
-            }
-            100% { 
-                transform: scale(1); 
-                opacity: 0.8;
+            50% {
+                transform: scale(1.2);
             }
         }
         
         /* Main Content */
         .letter-container {
-            background: rgba(25, 25, 35, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            margin-bottom: 40px;
+            background: linear-gradient(145deg, rgba(30, 25, 45, 0.95), rgba(40, 30, 60, 0.95));
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            padding: 60px;
+            margin-bottom: 60px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(157, 78, 221, 0.2);
+            border: 2px solid rgba(199, 125, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
         
         .letter-container::before {
@@ -209,248 +315,387 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(to right, #5a189a, #7b2cbf, #9d4edd);
+            height: 6px;
+            background: linear-gradient(to right, #ff6b9d, #c77dff, #9d4edd, #ff6b9d);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
         }
         
         .letter-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(224, 170, 255, 0.2);
         }
         
         .recipient {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #e0aaff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ffd6ff;
         }
         
         .date {
-            color: #b8b8d1;
+            color: #c77dff;
             font-style: italic;
+            font-size: 1.3rem;
         }
         
         .letter-content {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #d8d8e6;
+            font-size: 1.4rem;
+            line-height: 1.9;
+            color: #f0e6ff;
         }
         
         .letter-content p {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-align: justify;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .letter-content p::before {
+            content: '❀';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            color: #ff6b9d;
+            opacity: 0.7;
         }
         
         .secret-note {
-            background: rgba(157, 78, 221, 0.1);
-            border-left: 3px solid #9d4edd;
-            padding: 15px;
-            margin: 25px 0;
-            border-radius: 0 5px 5px 0;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(199, 125, 255, 0.15));
+            border-left: 4px solid #ff6b9d;
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 0 15px 15px 0;
             font-style: italic;
+            font-size: 1.5rem;
+            color: #ffd6ff;
+            box-shadow: inset 0 0 20px rgba(255, 107, 157, 0.1);
         }
         
         .signature {
             text-align: right;
-            margin-top: 40px;
+            margin-top: 60px;
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
-            color: #c77dff;
+            font-size: 3.5rem;
+            color: #ff6b9d;
+            text-shadow: 0 0 15px rgba(255, 107, 157, 0.3);
+            position: relative;
+            padding-right: 80px;
+        }
+        
+        .signature::after {
+            content: '💖';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
         }
         
         /* Memories Section */
         .memories-section {
-            margin-top: 60px;
+            margin-top: 80px;
         }
         
         h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: #e0aaff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ffd6ff;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
         h2::after {
             content: "";
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(to right, #5a189a, #9d4edd);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(to right, #ff6b9d, #c77dff);
+            border-radius: 3px;
         }
         
         .memories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
         }
         
         .memory-card {
-            background: rgba(30, 30, 46, 0.9);
-            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(40, 30, 60, 0.9), rgba(50, 35, 75, 0.9));
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(157, 78, 221, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(199, 125, 255, 0.2);
+            position: relative;
+            cursor: pointer;
         }
         
         .memory-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(157, 78, 221, 0.3);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 107, 157, 0.5);
+        }
+        
+        .memory-card:hover .memory-img {
+            transform: scale(1.1);
         }
         
         .memory-img {
-            height: 180px;
-            background: linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%);
+            height: 220px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c77dff 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #e0aaff;
-            font-size: 3rem;
+            color: #ffd6ff;
+            font-size: 4.5rem;
+            transition: transform 0.7s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .memory-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+        }
+        
+        .memory-card:hover .memory-img::after {
+            animation: shine 1.5s;
+        }
+        
+        @keyframes shine {
+            100% {
+                transform: translateX(100%);
+            }
         }
         
         .memory-content {
-            padding: 20px;
+            padding: 30px;
         }
         
         .memory-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: #e0aaff;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            color: #ffd6ff;
+            margin-bottom: 15px;
         }
         
         .memory-desc {
-            color: #b8b8d1;
-            font-size: 0.95rem;
+            color: #e0aaff;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
         
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
+            padding: 60px 20px;
+            margin-top: 80px;
             color: #b8b8d1;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
         
         .love-counter {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 60px;
         }
         
         .counter-item {
-            margin: 0 15px;
             text-align: center;
         }
         
         .counter-number {
-            font-size: 2rem;
+            font-size: 3.5rem;
             font-weight: bold;
-            color: #c77dff;
+            color: #ff6b9d;
             display: block;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 0 0 10px rgba(255, 107, 157, 0.3);
         }
         
         .counter-label {
-            font-size: 0.9rem;
-            color: #b8b8d1;
+            font-size: 1.2rem;
+            color: #c77dff;
+            margin-top: 10px;
         }
         
         /* Interactive elements */
         .interactive-placeholder {
-            background: rgba(30, 30, 46, 0.7);
-            border-radius: 10px;
-            padding: 30px;
-            margin-top: 40px;
+            background: linear-gradient(135deg, rgba(40, 30, 60, 0.7), rgba(50, 35, 75, 0.7));
+            border-radius: 20px;
+            padding: 50px;
+            margin-top: 60px;
             text-align: center;
-            border: 2px dashed rgba(157, 78, 221, 0.3);
+            border: 2px dashed rgba(199, 125, 255, 0.4);
+            backdrop-filter: blur(5px);
         }
         
         .interactive-placeholder h3 {
-            color: #e0aaff;
-            margin-bottom: 15px;
-            font-family: 'Playfair Display', serif;
+            color: #ffd6ff;
+            margin-bottom: 25px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
         }
         
-        .js-indicator {
-            display: inline-block;
-            background: linear-gradient(to right, #5a189a, #9d4edd);
+        .interactive-placeholder p {
+            color: #e0aaff;
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            line-height: 1.8;
+        }
+        
+        .secret-button {
+            background: linear-gradient(45deg, #ff6b9d, #c77dff);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 15px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 20px;
+            display: inline-block;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .secret-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.3);
+            background: linear-gradient(45deg, #ff7ea9, #d18cff);
         }
         
         /* Security elements */
         .security-notice {
             text-align: center;
-            margin: 20px 0;
-            padding: 10px;
-            background: rgba(90, 24, 154, 0.1);
-            border-radius: 5px;
-            font-size: 0.9rem;
-            color: #b8b8d1;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(199, 125, 255, 0.1));
+            border-radius: 15px;
+            font-size: 1.1rem;
+            color: #e0aaff;
+            border: 1px solid rgba(199, 125, 255, 0.3);
         }
         
         .encrypted-icon {
-            color: #9d4edd;
-            margin-right: 8px;
-        }
-        
-        /* Button for future functionality */
-        .secret-button {
-            background: linear-gradient(to right, #5a189a, #7b2cbf);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            display: inline-block;
-        }
-        
-        .secret-button:hover {
-            background: linear-gradient(to right, #7b2cbf, #9d4edd);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+            color: #ff6b9d;
+            margin-right: 10px;
         }
         
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 3.5rem;
             }
             
             .letter-container {
-                padding: 25px;
+                padding: 40px;
+            }
+            
+            .memories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .letter-container {
+                padding: 30px;
             }
             
             .letter-header {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 20px;
             }
             
             .date {
-                margin-top: 10px;
+                align-self: flex-end;
+            }
+            
+            .letter-content {
+                font-size: 1.2rem;
+            }
+            
+            .secret-note {
+                font-size: 1.3rem;
+                padding: 20px;
             }
             
             .memories-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .password-container {
+                padding: 40px 25px;
+            }
+            
+            .password-container h2 {
+                font-size: 2.5rem;
+            }
+            
+            .counter-number {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .letter-content {
+                font-size: 1.1rem;
+            }
+            
+            .letter-content p {
+                padding-left: 15px;
             }
             
             .password-container {
@@ -458,25 +703,25 @@
             }
             
             .password-container h2 {
-                font-size: 1.8rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
                 font-size: 2rem;
             }
             
-            .subtitle {
+            .password-input {
+                padding: 15px 20px;
                 font-size: 1.1rem;
             }
             
-            .letter-content {
-                font-size: 1rem;
+            .password-submit {
+                padding: 15px 30px;
+                font-size: 1.1rem;
             }
             
-            .memories-grid {
-                grid-template-columns: 1fr;
+            .counter-number {
+                font-size: 2.2rem;
+            }
+            
+            .love-counter {
+                gap: 30px;
             }
         }
     </style>
@@ -484,204 +729,234 @@
 <body>
     <!-- Password Protection Screen -->
     <div class="password-screen" id="passwordScreen">
+        <!-- Создаем плавающие сердечки -->
+        <div class="floating-hearts" id="floatingHearts"></div>
+        
         <div class="password-container">
-            <h2><i class="fas fa-lock"></i> Защищенное послание</h2>
-            <p>Это сообщение зашифровано и доступно только для адресата. Введите пароль для доступа.</p>
+            <h2>Только для тебя 💖</h2>
+            <p>Этот уголок вселенной создан специально для самой прекрасной девушки. Введи магическое слово, чтобы открыть послание...</p>
             
             <div class="password-input-container">
-                <input type="password" id="passwordInput" class="password-input" placeholder="Введите секретный пароль">
-                <span class="password-toggle" id="passwordToggle">
-                    <i class="fas fa-eye"></i>
-                </span>
+                <input type="text" id="passwordInput" class="password-input" placeholder="Подсказка: чувство, которое ты вызываешь">
             </div>
             
             <div class="password-error" id="passwordError">
-                Неверный пароль. Попробуйте еще раз.
+                Не то слово... Попробуй "любовь" или "нежность"
             </div>
             
             <button class="password-submit" id="passwordSubmit">
-                <i class="fas fa-key"></i> Открыть послание
+                Открыть сердце
             </button>
             
             <div class="password-hint">
-                Подсказка: пароль состоит только из цифр
+                Любое тёплое чувство подойдет... Ты ведь и есть воплощение всех прекрасных чувств
             </div>
         </div>
     </div>
     
-    <!-- Main Content (hidden until password is entered) -->
+    <!-- Main Content -->
     <div class="main-content" id="mainContent">
         <div class="container">
             <header>
                 <div class="header-content">
-                    <h1>Тайное послание</h1>
+                    <h1>Ты — моё вдохновение</h1>
                     <div class="subtitle">
                         <i class="fas fa-heart heart-icon"></i>
-                        Слова, которые можно сказать только шепотом
+                        Эти слова рождены твоим присутствием в моей жизни
                         <i class="fas fa-heart heart-icon"></i>
                     </div>
-                    <p style="color: #b8b8d1;">Это послание только для тебя, самого особенного человека в моей жизни</p>
+                    <p style="color: #e0aaff; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Каждая буква здесь пропитана восхищением тобой</p>
                 </div>
             </header>
             
             <div class="security-notice">
                 <i class="fas fa-lock encrypted-icon"></i>
-                Это сообщение защищено паролем и доступно только для твоих глаз
+                Это пространство существует только потому, что в мире есть ты
             </div>
             
             <main>
                 <section class="letter-container">
                     <div class="letter-header">
-                        <div class="recipient">Моя тайная любовь,</div>
-                        <div class="date">Сегодня, <span id="current-date"></span></div>
+                        <div class="recipient">Моя прекрасная,</div>
+                        <div class="date">Сегодня и всегда, <span id="current-date"></span></div>
                     </div>
                     
                     <div class="letter-content">
-                        <p>Эти безумные недели с тобой перевернули мой мир с ног на голову. Каждая встреча, каждый взгляд, каждое прикосновение — всё это заставляет мое сердце биться чаще, а мысли занимаешь только ты.</p>
+                        <p>С момента нашей встречи мой мир окрасился новыми красками. Ты принесла с собой что-то особенное — лёгкость, свет и невероятное тепло, которое я чувствую каждый раз, когда думаю о тебе.</p>
                         
-                        <p>Я знаю, что наша ситуация сложная, и мы должны быть осторожны. Но эти чувства, которые вспыхнули между нами, слишком сильны, чтобы их игнорировать. Ты появилась в моей жизни внезапно, как яркая вспышка в темноте, и теперь всё вокруг окрасилось новыми красками.</p>
+                        <p>Мне не нужно много времени, чтобы понять, насколько ты уникальна. Твоя улыбка, твой взгляд, твоя манера говорить — всё это складывается в совершенную картину, которую хочется рассматривать бесконечно.</p>
                         
                         <div class="secret-note">
-                            Я понимаю все обстоятельства, но не могу молчать о том, что чувствую. Каждая минута вдали от тебя кажется вечностью.
+                            Ты пробуждаешь во мне чувства, о которых я даже не подозревал. И в этом волшебство твоего присутствия.
                         </div>
                         
-                        <p>Помнишь наш первый раз? Казалось, мы знали друг друга всю жизнь. С той самой минуты я понял, что встретил кого-то невероятно особенного. Твоя улыбка, твой смех, твой взгляд — всё это сводит меня с ума.</p>
+                        <p>Я ценю каждую нашу встречу, каждый разговор, каждый момент, когда наши взгляды встречаются. В эти мгновения время замедляется, и весь мир сосредотачивается на том, что происходит между нами.</p>
                         
-                        <p>Эти моменты были самыми счастливыми в моей жизни. Каждая встреча с тобой — как глоток свежего воздуха для тонущего меня. Я ловлю себя на мысли, что постоянно жду нашей следующей встречи, следующего момента, когда смогу снова увидеть тебя.</p>
+                        <p>Ты — как свежий ветер, который наполнил паруса моей жизни новыми смыслами и направлениями. С тобой всё кажется возможным, всё обретает смысл и ценность.</p>
                         
-                        <p>Ты пробудила во мне чувства, о которых я даже не подозревал. И пусть наше время вместе ограничено обстоятельствами, каждую секунду с тобой я буду ценить как самый большой подарок судьбы.</p>
+                        <p>Это послание — лишь малая часть того, что я чувствую. Словами невозможно передать всю глубину восхищения, которое ты вызываешь. Но я надеюсь, что ты почувствуешь тепло этих строк, словно это моё сердце говорит с тобой напрямую.</p>
                         
-                        <p>Это послание — моё признание. Признание в том, что ты заняла особое место в моём сердце, которое никто и никогда не сможет занять.</p>
+                        <p>Спасибо, что ты есть. Спасибо за ту энергию, которую ты даришь миру. Спасибо за то, что просто существуешь.</p>
                     </div>
                     
-                    <div class="signature">Тот, кто думает о тебе каждую минуту</div>
+                    <div class="signature">Тот, кто восхищается тобой</div>
                 </section>
                 
                 <section class="memories-section">
-                    <h2>Наши украденные моменты</h2>
+                    <h2>Что делает тебя особенной</h2>
                     <div class="memories-grid">
                         <div class="memory-card">
                             <div class="memory-img">
-                                <i class="fas fa-kiss-wink-heart"></i>
+                                <i class="fas fa-smile-beam"></i>
                             </div>
                             <div class="memory-content">
-                                <div class="memory-title">Первый поцелуй</div>
-                                <div class="memory-desc">Момент, когда наши губы встретились, и я понял, что всё изменилось навсегда.</div>
+                                <div class="memory-title">Твоя улыбка</div>
+                                <div class="memory-desc">Она освещает всё вокруг и делает мир лучше. В ней столько искренности и тепла, что хочется видеть её как можно чаще.</div>
                             </div>
                         </div>
                         
                         <div class="memory-card">
                             <div class="memory-img">
-                                <i class="fas fa-heart"></i>
+                                <i class="fas fa-star"></i>
                             </div>
                             <div class="memory-content">
-                                <div class="memory-title">Тайная встреча</div>
-                                <div class="memory-desc">Тот час, который длился вечность. Мы говорили обо всем и ни о чем одновременно.</div>
+                                <div class="memory-title">Твоя энергия</div>
+                                <div class="memory-desc">Ты наполняешь пространство вокруг себя особой атмосферой — лёгкой, тёплой и невероятно притягательной.</div>
                             </div>
                         </div>
                         
                         <div class="memory-card">
                             <div class="memory-img">
-                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-comment-dots"></i>
                             </div>
                             <div class="memory-content">
-                                <div class="memory-title">Ночные разговоры</div>
-                                <div class="memory-desc">Когда весь мир спал, а мы делились своими самыми сокровенными мыслями.</div>
+                                <div class="memory-title">Твои разговоры</div>
+                                <div class="memory-desc">С тобой можно говорить обо всём на свете. Ты умеешь слушать и слышать, что делает любое общение ценным.</div>
                             </div>
                         </div>
                     </div>
                 </section>
                 
                 <div class="interactive-placeholder">
-                    <h3>Тайные функции скоро появятся!</h3>
-                    <p>Тут я обязательно что нибудь придумаю но попозже!!!</p>
+                    <h3>Место для нашего будущего</h3>
+                    <p>Здесь будут появляться новые воспоминания, новые моменты и новые поводы для улыбок. Этот уголок интернета будет расти вместе с нашими чувствами.</p>
                     <button class="secret-button" id="secretBtn">
-                        <i class="fas fa-key"></i> Сообщение
+                        <i class="fas fa-heart"></i> Получить виртуальный букет
                     </button>
-                    <div class="js-indicator">JavaScript функционал будет добавлен позже</div>
+                    <p style="margin-top: 20px; font-size: 1rem; color: #c77dff;">
+                        Нажми, чтобы получить немного тепла ❤
+                    </p>
                 </div>
             </main>
             
             <footer>
                 <div class="love-counter">
                     <div class="counter-item">
-                        <span class="counter-number" id="days-together">3</span>
-                        <span class="counter-label">дней до встречи</span>
-                    </div>
-                    <div class="counter-item">
                         <span class="counter-number">∞</span>
                         <span class="counter-label">мыслей о тебе</span>
                     </div>
+                    <div class="counter-item">
+                        <span class="counter-number" id="days-since">2</span>
+                        <span class="counter-label">дней до встречи</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-number">100%</span>
+                        <span class="counter-label">искренности</span>
+                    </div>
                 </div>
+                <p style="color: #c77dff; margin-top: 30px; font-size: 1.1rem;">
+                    Создано с бесконечным восхищением и нежностью
+                </p>
             </footer>
         </div>
     </div>
 
     <script>
-        // Обратите внимание: в реальном коде нельзя полностью скрыть контент от просмотра через DevTools
-        // Но можно значительно затруднить доступ для обычного пользователя
-        
         document.addEventListener('DOMContentLoaded', function() {
-            const CORRECT_PASSWORD = '211125252';
+            // Создаем плавающие сердечки
+            function createFloatingHearts() {
+                const container = document.getElementById('floatingHearts');
+                const heartCount = 20;
+                
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = '❤';
+                    
+                    // Случайные параметры
+                    const size = Math.random() * 1.5 + 0.5;
+                    const left = Math.random() * 100;
+                    const delay = Math.random() * 15;
+                    const duration = Math.random() * 10 + 15;
+                    const color = `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 100)}, ${Math.floor(Math.random() * 200 + 200)}, ${Math.random() * 0.3 + 0.2})`;
+                    
+                    heart.style.left = `${left}%`;
+                    heart.style.fontSize = `${size}rem`;
+                    heart.style.animationDelay = `${delay}s`;
+                    heart.style.animationDuration = `${duration}s`;
+                    heart.style.color = color;
+                    
+                    container.appendChild(heart);
+                }
+            }
+            
+            createFloatingHearts();
+            
+            // Пароли (любое романтичное слово подойдет)
+            const validPasswords = ['любовь', 'нежность', 'восхищение', 'вдохновение', 'радость', 'счастье', 'тепло', 'свет', 'мечта', 'ангел'];
+            
             const passwordScreen = document.getElementById('passwordScreen');
             const mainContent = document.getElementById('mainContent');
             const passwordInput = document.getElementById('passwordInput');
             const passwordSubmit = document.getElementById('passwordSubmit');
             const passwordError = document.getElementById('passwordError');
-            const passwordToggle = document.getElementById('passwordToggle');
             
-            // Проверяем, был ли уже введен пароль (сохраненный в sessionStorage)
+            // Проверяем, был ли уже введен пароль
             const passwordEntered = sessionStorage.getItem('loveMessageUnlocked');
             
             if (passwordEntered === 'true') {
-                // Если пароль уже был введен в этой сессии, показываем контент
-                passwordScreen.style.display = 'none';
+                passwordScreen.classList.add('hidden');
                 mainContent.style.display = 'block';
                 initializeMainContent();
-            } else {
-                // Иначе показываем экран ввода пароля
-                passwordScreen.style.display = 'flex';
-                mainContent.style.display = 'none';
+                
+                // Добавляем дополнительные сердечки при повторном входе
+                setTimeout(() => {
+                    createFloatingHearts();
+                }, 100);
             }
             
-            // Функция для переключения видимости пароля
-            passwordToggle.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-            });
-            
-            // Функция проверки пароля
+            // Функция проверки пароля (принимает любое красивое слово)
             function checkPassword() {
-                const enteredPassword = passwordInput.value.trim();
+                const enteredPassword = passwordInput.value.trim().toLowerCase();
                 
-                if (enteredPassword === CORRECT_PASSWORD) {
-                    // Правильный пароль
-                    passwordError.style.display = 'none';
+                if (validPasswords.includes(enteredPassword) || enteredPassword === '') {
+                    // Принимаем также пустой ввод как знак доверия
+                    passwordError.classList.remove('show');
                     
-                    // Сохраняем в sessionStorage, что пароль введен
+                    // Сохраняем в sessionStorage
                     sessionStorage.setItem('loveMessageUnlocked', 'true');
                     
-                    // Показываем анимацию успеха
-                    passwordSubmit.innerHTML = '<i class="fas fa-check"></i> Доступ разрешен!';
-                    passwordSubmit.style.background = 'linear-gradient(to right, #2e7d32, #4caf50)';
+                    // Красивая анимация успеха
+                    passwordSubmit.innerHTML = 'Открывается... <i class="fas fa-heart"></i>';
+                    passwordSubmit.style.background = 'linear-gradient(45deg, #4caf50, #2e7d32)';
+                    
+                    // Создаем вспышку сердечек
+                    createHeartBurst();
                     
                     // Плавный переход к контенту
                     setTimeout(() => {
-                        passwordScreen.style.opacity = '0';
-                        passwordScreen.style.transition = 'opacity 0.5s ease';
+                        passwordScreen.classList.add('hidden');
                         
                         setTimeout(() => {
-                            passwordScreen.style.display = 'none';
                             mainContent.style.display = 'block';
                             initializeMainContent();
-                        }, 500);
-                    }, 1000);
+                        }, 800);
+                    }, 1500);
                 } else {
                     // Неправильный пароль
-                    passwordError.style.display = 'block';
-                    passwordInput.style.borderColor = '#ff6b6b';
-                    passwordInput.style.boxShadow = '0 0 10px rgba(255, 107, 107, 0.3)';
+                    passwordError.classList.add('show');
+                    passwordInput.style.borderColor = '#ff6b9d';
+                    passwordInput.style.boxShadow = '0 0 20px rgba(255, 107, 157, 0.3)';
                     
                     // Анимация ошибки
                     passwordInput.classList.add('shake');
@@ -689,19 +964,81 @@
                         passwordInput.classList.remove('shake');
                     }, 500);
                     
-                    // Очищаем поле ввода через некоторое время
+                    // Автозаполнение подсказкой через некоторое время
                     setTimeout(() => {
-                        passwordInput.value = '';
-                        passwordInput.style.borderColor = 'rgba(157, 78, 221, 0.5)';
-                        passwordInput.style.boxShadow = 'none';
-                    }, 1500);
+                        if (passwordInput.value.trim() === '') {
+                            passwordInput.value = 'любовь';
+                            passwordError.textContent = 'Правильно! Любовь — это именно то чувство ❤';
+                            passwordError.style.color = '#c77dff';
+                            passwordError.classList.add('show');
+                            
+                            // Автоматически отправляем
+                            setTimeout(checkPassword, 1000);
+                        }
+                    }, 2000);
                 }
             }
             
-            // Обработчик нажатия на кнопку ввода пароля
+            // Создаем вспышку сердечек
+            function createHeartBurst() {
+                const container = passwordScreen;
+                const heartCount = 30;
+                
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤';
+                    heart.style.position = 'absolute';
+                    heart.style.fontSize = `${Math.random() * 2 + 1}rem`;
+                    heart.style.color = `hsl(${Math.random() * 60 + 300}, 100%, 70%)`;
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.zIndex = '1001';
+                    heart.style.opacity = '0';
+                    heart.style.pointerEvents = 'none';
+                    
+                    container.appendChild(heart);
+                    
+                    // Анимация разлета
+                    const angle = Math.random() * Math.PI * 2;
+                    const velocity = Math.random() * 100 + 50;
+                    const vx = Math.cos(angle) * velocity;
+                    const vy = Math.sin(angle) * velocity;
+                    
+                    const duration = Math.random() * 1000 + 1000;
+                    
+                    heart.animate([
+                        { 
+                            opacity: 1,
+                            transform: 'translate(-50%, -50%) scale(1)',
+                            offset: 0
+                        },
+                        { 
+                            opacity: 1,
+                            transform: `translate(${-50 + vx * 0.3}%, ${-50 + vy * 0.3}%) scale(1.5)`,
+                            offset: 0.3
+                        },
+                        { 
+                            opacity: 0,
+                            transform: `translate(${-50 + vx}%, ${-50 + vy}%) scale(0.5)`,
+                            offset: 1
+                        }
+                    ], {
+                        duration: duration,
+                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                    });
+                    
+                    // Удаляем элемент после анимации
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, duration);
+                }
+            }
+            
+            // Обработчики событий
             passwordSubmit.addEventListener('click', checkPassword);
             
-            // Обработчик нажатия Enter в поле пароля
             passwordInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     checkPassword();
@@ -713,8 +1050,8 @@
             shakeStyle.textContent = `
                 @keyframes shake {
                     0%, 100% { transform: translateX(0); }
-                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+                    20%, 40%, 60%, 80% { transform: translateX(8px); }
                 }
                 .shake {
                     animation: shake 0.5s ease-in-out;
@@ -724,133 +1061,197 @@
             
             // Функция инициализации основного контента
             function initializeMainContent() {
-                // Set current date
+                // Устанавливаем текущую дату
                 const now = new Date();
                 const options = { day: 'numeric', month: 'long', year: 'numeric' };
                 document.getElementById('current-date').textContent = now.toLocaleDateString('ru-RU', options);
                 
-                // Add click effect to heart icons
-                const heartIcons = document.querySelectorAll('.fa-heart');
+                // Устанавливаем счетчик дней (можно настроить под дату знакомства)
+                const meetDate = new Date(); // Здесь можно установить дату знакомства
+                // Например: const meetDate = new Date('2023-11-21');
+                const daysSince = Math.floor((now - meetDate) / (1000 * 60 * 60 * 24));
+                document.getElementById('days-since').textContent = daysSince > 0 ? daysSince : '1';
+                
+                // Добавляем обработчики для сердечек
+                const heartIcons = document.querySelectorAll('.heart-icon');
                 heartIcons.forEach(icon => {
                     icon.addEventListener('click', function() {
-                        this.style.transform = 'scale(1.5)';
-                        this.style.color = '#e0aaff';
-                        this.style.textShadow = '0 0 15px rgba(224, 170, 255, 0.8)';
+                        this.style.transform = 'scale(1.8)';
+                        this.style.color = '#ff9e9e';
+                        this.style.textShadow = '0 0 20px rgba(255, 158, 158, 0.8)';
+                        
+                        // Создаем маленькое сердечко, которое улетает
+                        createFloatingHeartAtCursor(event);
+                        
                         setTimeout(() => {
-                            this.style.transform = 'scale(1)';
-                            this.style.textShadow = 'none';
-                        }, 300);
+                            this.style.transform = '';
+                            this.style.color = '';
+                            this.style.textShadow = '';
+                        }, 400);
                     });
                 });
                 
-                // Secret button interaction
+                // Обработчик для кнопки отправки букета
                 const secretBtn = document.getElementById('secretBtn');
                 secretBtn.addEventListener('click', function() {
                     const originalText = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-user-secret"></i> Послание отправлено!';
-                    this.style.background = 'linear-gradient(to right, #3a0ca3, #4361ee)';
+                    this.innerHTML = '<i class="fas fa-heart"></i> Букет отправлен!';
+                    this.style.background = 'linear-gradient(45deg, #ff4081, #f50057)';
+                    
+                    // Создаем анимацию цветов
+                    createFlowerAnimation();
                     
                     setTimeout(() => {
                         this.innerHTML = originalText;
-                        this.style.background = 'linear-gradient(to right, #5a189a, #7b2cbf)';
-                    }, 1500);
-                    
-                    // Create a temporary secret message
-                    const secretMessage = document.createElement('div');
-                    secretMessage.className = 'security-notice';
-                    secretMessage.style.marginTop = '15px';
-                    secretMessage.style.animation = 'fadeIn 0.5s';
-                    secretMessage.innerHTML = '<i class="fas fa-envelope encrypted-icon"></i> Сообщение ❤: "Я с нетерпением жду нашей следующей встречи"';
-                    
-                    this.parentNode.appendChild(secretMessage);
-                    
-                    setTimeout(() => {
-                        secretMessage.style.opacity = '0';
-                        secretMessage.style.transition = 'opacity 0.5s';
-                        setTimeout(() => {
-                            if (secretMessage.parentNode) {
-                                secretMessage.parentNode.removeChild(secretMessage);
-                            }
-                        }, 500);
-                    }, 3000);
+                        this.style.background = 'linear-gradient(45deg, #ff6b9d, #c77dff)';
+                    }, 2000);
                 });
                 
-                // Add hover effect to memory cards
+                // Добавляем эффект при наведении на карточки воспоминаний
                 const memoryCards = document.querySelectorAll('.memory-card');
-                memoryCards.forEach(card => {
-                    card.addEventListener('mouseenter', function() {
-                        const icon = this.querySelector('.memory-img i');
-                        if (icon) {
-                            icon.style.transform = 'scale(1.3) rotate(5deg)';
-                            icon.style.transition = 'transform 0.3s ease';
-                            icon.style.color = '#ffd6ff';
-                        }
-                    });
-                    
-                    card.addEventListener('mouseleave', function() {
-                        const icon = this.querySelector('.memory-img i');
-                        if (icon) {
-                            icon.style.transform = 'scale(1) rotate(0deg)';
-                            icon.style.color = '#e0aaff';
-                        }
+                memoryCards.forEach((card, index) => {
+                    card.addEventListener('click', function() {
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
                     });
                 });
                 
-                // Add CSS for fadeIn animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes fadeIn {
-                        from { opacity: 0; transform: translateY(10px); }
-                        to { opacity: 1; transform: translateY(0); }
+                // Создаем плавающие сердечки на основном экране
+                setInterval(() => {
+                    if (Math.random() > 0.7) {
+                        createFloatingHeartRandom();
                     }
-                `;
-                document.head.appendChild(style);
-                
-                console.log("Защищенное любовное послание загружено. Доступ разрешен.");
+                }, 3000);
             }
             
-            // Защита от просмотра через DevTools (базовая)
-            // Важно: это не может полностью защитить от технически подкованного пользователя
-            // Но это создаст дополнительные препятствия
+            // Создает плавающее сердечко в случайном месте
+            function createFloatingHeartRandom() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = `${Math.random() * 1.5 + 1}rem`;
+                heart.style.color = `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 100)}, ${Math.floor(Math.random() * 200 + 200)}, ${Math.random() * 0.4 + 0.3})`;
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = '100%';
+                heart.style.zIndex = '9999';
+                heart.style.pointerEvents = 'none';
+                heart.style.opacity = '0';
+                
+                document.body.appendChild(heart);
+                
+                // Анимация
+                const duration = Math.random() * 4000 + 3000;
+                
+                heart.animate([
+                    { opacity: 0, transform: 'translateY(0) scale(0.5)' },
+                    { opacity: 1, transform: 'translateY(-20px) scale(1)' },
+                    { opacity: 1, transform: 'translateY(-40px) scale(1.2)' },
+                    { opacity: 0, transform: 'translateY(-100px) scale(0.5)' }
+                ], {
+                    duration: duration,
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                });
+                
+                // Удаляем элемент после анимации
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, duration);
+            }
             
-            // Функция для защиты от контекстного меню (правой кнопки мыши)
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
+            // Создает плавающее сердечко в позиции курсора
+            function createFloatingHeartAtCursor(event) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = '1.2rem';
+                heart.style.color = '#ff9e9e';
+                heart.style.left = `${event.clientX}px`;
+                heart.style.top = `${event.clientY}px`;
+                heart.style.zIndex = '9999';
+                heart.style.pointerEvents = 'none';
+                heart.style.opacity = '1';
+                heart.style.transform = 'translate(-50%, -50%)';
+                
+                document.body.appendChild(heart);
+                
+                // Анимация
+                heart.animate([
+                    { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+                    { opacity: 0.8, transform: 'translate(-50%, -100px) scale(1.5)' },
+                    { opacity: 0, transform: 'translate(-50%, -150px) scale(0.5)' }
+                ], {
+                    duration: 1200,
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                });
+                
+                // Удаляем элемент после анимации
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 1200);
+            }
             
-            // Функция для защиты от комбинаций клавиш (Ctrl+U, Ctrl+Shift+I и т.д.)
-            document.addEventListener('keydown', function(e) {
-                // Отключаем F12
-                if (e.key === 'F12') {
-                    e.preventDefault();
-                    return false;
-                }
+            // Создает анимацию цветов
+            function createFlowerAnimation() {
+                const flowers = ['❀', '✿', '💐', '🌸', '🌺', '🌷', '🌹', '🥀'];
+                const container = document.querySelector('.interactive-placeholder');
                 
-                // Отключаем Ctrl+U (просмотр исходного кода)
-                if (e.ctrlKey && e.key === 'u') {
-                    e.preventDefault();
-                    return false;
+                for (let i = 0; i < 15; i++) {
+                    const flower = document.createElement('div');
+                    flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                    flower.style.position = 'absolute';
+                    flower.style.fontSize = `${Math.random() * 2 + 1}rem`;
+                    flower.style.color = `hsl(${Math.random() * 60 + 300}, 100%, 70%)`;
+                    flower.style.left = '50%';
+                    flower.style.top = '50%';
+                    flower.style.zIndex = '10';
+                    flower.style.opacity = '0';
+                    flower.style.pointerEvents = 'none';
+                    
+                    container.appendChild(flower);
+                    
+                    // Анимация
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 100 + 50;
+                    const vx = Math.cos(angle) * distance;
+                    const vy = Math.sin(angle) * distance;
+                    
+                    const duration = Math.random() * 1000 + 1500;
+                    
+                    flower.animate([
+                        { 
+                            opacity: 1,
+                            transform: 'translate(-50%, -50%) scale(0.5)',
+                            offset: 0
+                        },
+                        { 
+                            opacity: 1,
+                            transform: `translate(${-50 + vx * 0.5}%, ${-50 + vy * 0.5}%) scale(1.2)`,
+                            offset: 0.5
+                        },
+                        { 
+                            opacity: 0,
+                            transform: `translate(${-50 + vx}%, ${-50 + vy}%) scale(0.3)`,
+                            offset: 1
+                        }
+                    ], {
+                        duration: duration,
+                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                    });
+                    
+                    // Удаляем элемент после анимации
+                    setTimeout(() => {
+                        if (flower.parentNode) {
+                            flower.parentNode.removeChild(flower);
+                        }
+                    }, duration);
                 }
-                
-                // Отключаем Ctrl+Shift+I (открытие DevTools)
-                if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-                    e.preventDefault();
-                    return false;
-                }
-                
-                // Отключаем Ctrl+Shift+J (открытие консоли)
-                if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-                    e.preventDefault();
-                    return false;
-                }
-                
-                // Отключаем Ctrl+Shift+C (инспектор элементов)
-                if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-                    e.preventDefault();
-                    return false;
-                }
-            });
+            }
         });
     </script>
 </body>
